@@ -168,7 +168,7 @@ function! QFGrep#grep_QuickFix(invert)
     return
   endif
   call inputsave()
-  let pat = input( s:msgHead . 'Pattern' . (a:invert?' (Invert-matching):':':'))
+  let pat = input( s:msgHead . 'Pattern' . (a:invert?' (Invert-matching): ':': '))
   call inputrestore()
   "clear the cmdline
   exec 'redraw' 
