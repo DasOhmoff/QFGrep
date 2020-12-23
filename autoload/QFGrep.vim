@@ -28,39 +28,17 @@ let g:autoloaded_QFGrep = 1
 "the message header
 let s:msgHead = '[QFGrep] ' 
 
-"read user's highlighting setting, and define highlighting groups {{{1
-if !exists('g:QFG_hi_prompt')
-  let g:QFG_hi_prompt='ctermbg=68 ctermfg=16 guibg=#5f87d7 guifg=black'
-endif
-
-if !exists('g:QFG_hi_info')
-  let g:QFG_hi_info = 'ctermbg=113 ctermfg=16 guibg=#87d75f guifg=black'
-endif
-
-if !exists('g:QFG_hi_error')
-  let g:QFG_hi_error = 'ctermbg=167 ctermfg=16 guibg=#d75f5f guifg=black'
-endif
-
-execute 'hi QFGPrompt ' . g:QFG_hi_prompt
-execute 'hi QFGInfo '   . g:QFG_hi_info
-execute 'hi QFGError '  . g:QFG_hi_error
-
-
 "helper methods {{{1
 
 "print err message in err highlighting{{{2
 function! QFGrep#print_err_msg(errMsg)
-  echohl QFGError
   echon s:msgHead . a:errMsg
-  echohl None
 endfunction
 
 
 "print Highlighted info {{{2
 function! QFGrep#print_HLInfo(msg)
-  echohl QFGInfo
-  echon s:msgHead .  a:msg
-  echohl None
+  echon s:msgHead . a:msg
 endfunction
 
 
@@ -190,9 +168,7 @@ function! QFGrep#grep_QuickFix(invert)
     return
   endif
   call inputsave()
-  echohl QFGPrompt
   let pat = input( s:msgHead . 'Pattern' . (a:invert?' (Invert-matching):':':'))
-  echohl None
   call inputrestore()
   "clear the cmdline
   exec 'redraw' 
